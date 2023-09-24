@@ -6,27 +6,39 @@ class Node {
   }
 }
 
+// const depthFirstValues = (root) => {
+//   // iteration approch
+
+//   const values = [];
+//   const stack = [root];
+
+//   if (!root) return [];
+
+//   while (stack?.length > 0) {
+//     const current = stack.pop();
+//     values.push(current.val);
+
+//     if (current?.right) {
+//       stack.push(current.right);
+//     }
+//     if (current?.left) {
+//       stack.push(current.left);
+//     }
+//   }
+
+//   return values;
+// };
+
 const depthFirstValues = (root) => {
-  // iteration approch
+  // recursion approch
+  if (root === null) return [];
 
-  const values = [];
-  const stack = [root];
+  const leftValues = depthFirstValues(root.left);
+  const rightValues = depthFirstValues(root.right);
 
-  if (!root) return [];
-
-  while (stack?.length > 0) {
-    const current = stack.pop();
-    values.push(current.val);
-
-    if (current?.right) {
-      stack.push(current.right);
-    }
-    if (current?.left) {
-      stack.push(current.left);
-    }
-  }
-
-  return values;
+  const ans = [root.val, ...leftValues, ...rightValues];
+  console.log('ans ', ans);
+  return ans;
 };
 
 const a = new Node('a');
@@ -50,4 +62,4 @@ c.right = f;
 //   / \   \
 // d    e    f
 
-console.log('--> ', depthFirstValues(a));
+depthFirstValues(a);
