@@ -7,7 +7,7 @@ class Node {
 }
 
 // const depthFirstValues = (root) => {
-//   // iteration approch
+//   // iterative approch
 
 //   const values = [];
 //   const stack = [root];
@@ -30,7 +30,8 @@ class Node {
 // };
 
 const depthFirstValues = (root) => {
-  // recursion approch
+  // recursive approch
+
   if (root === null) return [];
 
   const leftValues = depthFirstValues(root.left);
@@ -85,4 +86,38 @@ const breadthFirstValues = (root) => {
   return ans;
 };
 
-console.log(breadthFirstValues(a));
+const binarySearchTarget = (root, target) => {
+  // iterative approch
+  const queue = [root];
+
+  if (root === null) return false;
+
+  while (queue?.length > 0) {
+    let curr = queue?.pop();
+
+    if (curr?.val === target) return true;
+
+    if (curr?.left) {
+      queue.splice(0, 0, curr.left);
+    }
+
+    if (curr?.right) {
+      queue.splice(0, 0, curr.right);
+    }
+  }
+
+  return false;
+};
+
+const binarySearchTargetRecrsive = (root, target) => {
+  // recursive approch
+  if (root === null) return false;
+  if (root.val === target) return true;
+
+  return (
+    binarySearchTargetRecrsive(root.left, target) ||
+    binarySearchTargetRecrsive(root.right, target)
+  );
+};
+
+console.log(binarySearchTargetRecrsive(a, 'e'));
