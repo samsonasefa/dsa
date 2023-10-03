@@ -62,4 +62,27 @@ c.right = f;
 //   / \   \
 // d    e    f
 
-depthFirstValues(a);
+const breadthFirstValues = (root) => {
+  const ans = [];
+  const queue = [root];
+
+  if (root === null) return [];
+
+  while (queue?.length > 0) {
+    let curr = queue?.pop();
+
+    ans.push(curr?.val);
+
+    if (curr?.left) {
+      queue.splice(0, 0, curr.left);
+    }
+
+    if (curr?.right) {
+      queue.splice(0, 0, curr.right);
+    }
+  }
+
+  return ans;
+};
+
+console.log(breadthFirstValues(a));
