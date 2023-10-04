@@ -120,4 +120,50 @@ const binarySearchTargetRecrsive = (root, target) => {
   );
 };
 
-console.log(binarySearchTargetRecrsive(a, 'e'));
+// tree sum recursive
+// const binaryTreeTotalSum = (root) => {
+//   if (root === null) return 0;
+
+//   return (
+//     root.val + binaryTreeTotalSum(root.left) + binaryTreeTotalSum(root.right)
+//   );
+// };
+
+// tree sum iterative
+const binaryTreeTotalSum = (root) => {
+  const stack = [root];
+  let sum = 0;
+
+  if (root === null) return 0;
+
+  while (stack.length > 0) {
+    let curr = stack.pop();
+
+    sum += curr?.val;
+
+    if (curr?.left) {
+      stack.push(curr.left);
+    }
+    if (curr?.right) {
+      stack.push(curr.right);
+    }
+  }
+  return sum;
+};
+
+const aa = new Node(3);
+const bb = new Node(16);
+const cc = new Node(4);
+const dd = new Node(4);
+const ee = new Node(2);
+const ff = new Node(1);
+
+aa.left = bb;
+aa.right = cc;
+
+bb.left = dd;
+bb.right = ee;
+
+cc.right = ff;
+
+console.debug(' the total sum ', binaryTreeTotalSum(aa));
