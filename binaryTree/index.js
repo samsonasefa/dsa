@@ -151,28 +151,39 @@ const binaryTreeTotalSum = (root) => {
   return sum;
 };
 
+// const binaryTreeMinValue = (root) => {
+//   // iterative solution
+//   if (root === null) return null;
+
+//   let minimumVal = Number.POSITIVE_INFINITY;
+//   const stack = [root];
+
+//   while (stack.length > 0) {
+//     let curr = stack.pop();
+
+//     minimumVal = minimumVal < curr.val ? minimumVal : curr.val;
+
+//     if (curr.left) {
+//       stack.push(curr.left);
+//     }
+
+//     if (curr.right) {
+//       stack.push(curr.right);
+//     }
+//   }
+
+//   return minimumVal;
+// };
+
 const binaryTreeMinValue = (root) => {
-  // iterative solution
-  if (root === null) return null;
+  // recursive solution
 
-  let minimumVal = Number.POSITIVE_INFINITY;
-  const stack = [root];
+  if (root === null) return Infinity;
 
-  while (stack.length > 0) {
-    let curr = stack.pop();
+  let leftValues = binaryTreeMinValue(root.left);
+  let rightValues = binaryTreeMinValue(root.right);
 
-    minimumVal = minimumVal < curr.val ? minimumVal : curr.val;
-
-    if (curr.left) {
-      stack.push(curr.left);
-    }
-
-    if (curr.right) {
-      stack.push(curr.right);
-    }
-  }
-
-  return minimumVal;
+  return Math.min(root.val, leftValues, rightValues);
 };
 
 const aa = new Node(3);
