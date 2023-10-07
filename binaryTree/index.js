@@ -151,6 +151,30 @@ const binaryTreeTotalSum = (root) => {
   return sum;
 };
 
+const binaryTreeMinValue = (root) => {
+  // iterative solution
+  if (root === null) return null;
+
+  let minimumVal = Number.POSITIVE_INFINITY;
+  const stack = [root];
+
+  while (stack.length > 0) {
+    let curr = stack.pop();
+
+    minimumVal = minimumVal < curr.val ? minimumVal : curr.val;
+
+    if (curr.left) {
+      stack.push(curr.left);
+    }
+
+    if (curr.right) {
+      stack.push(curr.right);
+    }
+  }
+
+  return minimumVal;
+};
+
 const aa = new Node(3);
 const bb = new Node(16);
 const cc = new Node(4);
@@ -166,4 +190,10 @@ bb.right = ee;
 
 cc.right = ff;
 
-console.debug(' the total sum ', binaryTreeTotalSum(aa));
+//           3
+//         /   \
+//       16     4
+//      /  \     \
+//     4    2     1
+
+console.debug(' the minimumVal ', binaryTreeMinValue(aa));
