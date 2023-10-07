@@ -207,4 +207,47 @@ cc.right = ff;
 //      /  \     \
 //     4    2     1
 
-console.debug(' the minimumVal ', binaryTreeMinValue(aa));
+// const binaryTreeMaxPathSum = (root) => {
+//   if (root === null) return 0;
+
+//   let leftValues = binaryTreeMaxPathSum(root.left);
+//   let rightValues = binaryTreeMaxPathSum(root.right);
+
+//   // return root.val + Math.max(leftValues) + Math.min(rightValues);
+// };
+
+// const binaryTreeMaxPathSum = (root) => {
+//   // iterative
+//   let maxPathSum = 0;
+//   let stack = [root];
+
+//   if (root === null) return maxPathSum;
+
+//   while (stack.length > 0) {
+//     let curr = stack.pop();
+
+//     maxPathSum += curr?.left?.val || 0 + curr?.right?.val || 0;
+
+//     if (curr.left) {
+//       stack.push(curr.left);
+//     }
+
+//     if (curr.right) {
+//       stack.push(curr.right);
+//     }
+//   }
+//   return root.val + maxPathSum;
+// };
+
+const binaryTreeMaxPathSum = (root) => {
+  if (root === null) return -Infinity;
+  if (root.left === null && root.right === null) return root.val;
+
+  const maxChildPath = Math.max(
+    binaryTreeMaxPathSum(root.left),
+    binaryTreeMaxPathSum(root.right)
+  );
+  return root.val + maxChildPath;
+};
+
+console.debug(' the minimumVal ', binaryTreeMaxPathSum(aa));
